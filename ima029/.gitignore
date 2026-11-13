@@ -1,0 +1,10 @@
+﻿.venv/
+__pycache__/
+*.pyc
+outputs/*
+!outputs/.gitkeep
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+.DS_Store
