@@ -1,7 +1,7 @@
 """AI Document OCR Translator - Gradio app.
 
 Upload a JPG/PNG/PDF in Chinese, Japanese, Korean, Bangla (and more), extract the text with
-EasyOCR (or directly from digital PDFs) and translate it into English with NLLB-200.
+EasyOCR (or directly from digital PDFs) and translate it into English with NLLB-200. IMAMUL-20243120029
 """
 import os
 
