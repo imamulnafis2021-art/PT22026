@@ -1,0 +1,13 @@
+# NOTE: install PyTorch with CUDA first (see README), then:  pip install -r requirements.txt
+torch>=2.6
+torchvision
+transformers>=4.44
+sentencepiece
+easyocr>=1.7
+gradio>=5.0,<6
+pymupdf>=1.24
+lingua-language-detector
+reportlab
+pillow
+numpy
+pytest
