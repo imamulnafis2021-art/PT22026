@@ -1,7 +1,7 @@
 """AI Document OCR Translator - Gradio app.
 
 Upload a JPG/PNG/PDF in Chinese, Japanese, Korean, Bangla (and more), extract the text with
-EasyOCR (or directly from digital PDFs) and translate it into English with NLLB-200. IMAMUL-20243120029
+EasyOCR (or directly from digital PDFs) and translate it into English with NLLB-200.
 """
 import os
 
@@ -256,7 +256,7 @@ def build_ui() -> gr.Blocks:
         state = gr.State(None)
 
         gr.Markdown(
-            "# AI Document OCR Translator\n"
+            "# AI Document OCR Translator by IMAMUL-20243120029\n"
             "Upload a **JPG, PNG or PDF** (Chinese, Japanese, Korean, Bangla and more). "
             "The app extracts the text with **EasyOCR** and translates it into English with **NLLB-200**. "
             "OCR mistakes? Edit the original text and press **Re-translate edited text**."
