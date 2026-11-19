@@ -1,4 +1,4 @@
-"""Translation stage: NLLB-200 (distilled 600M) encoder-decoder transformer, any language -> English."""
+"""Translation : NLLB-200 (distilled 600M) encoder-decoder transformer, any language -> English."""
 import logging
 import re
 from typing import List, Optional

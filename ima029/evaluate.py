@@ -10,7 +10,6 @@ Run from the ima029 folder with the venv active:
     python evaluate.py --auto       # use Auto-detect instead
 
 Output: docs/eval_results.csv (one row per sample) and a summary in the terminal.
-Requires: pip install sacrebleu
 """
 import os
 
