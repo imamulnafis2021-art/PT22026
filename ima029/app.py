@@ -252,7 +252,19 @@ def _sample_examples():
 
 
 def build_ui() -> gr.Blocks:
-    with gr.Blocks(title="AI Document OCR Translator", theme=gr.themes.Soft()) as demo:
+    custom_css = """
+    textarea {
+        font-family: 'Times New Roman', Times, serif !important;
+        font-size: 16px !important;
+    }
+    """
+
+    with gr.Blocks(
+        title="AI Document OCR Translator",
+        theme=gr.themes.Soft(),
+        css=custom_css
+    ) as demo:
+
         state = gr.State(None)
 
         gr.Markdown(
@@ -261,46 +273,126 @@ def build_ui() -> gr.Blocks:
             "The app extracts the text with **EasyOCR** and translates it into English with **NLLB-200**. "
             "OCR mistakes? Edit the original text and press **Re-translate edited text**."
         )
+
         with gr.Row():
             with gr.Column(scale=1):
-                file_input = gr.File(label="Upload document", file_types=list(ALLOWED_EXTENSIONS), type="filepath")
-                language_input = gr.Dropdown(LANGUAGE_CHOICES, value=AUTO_DETECT_LABEL, label="Source language")
-                run_button = gr.Button("Extract and Translate", variant="primary")
+                file_input = gr.File(
+                    label="Upload document",
+                    file_types=list(ALLOWED_EXTENSIONS),
+                    type="filepath"
+                )
+
+                language_input = gr.Dropdown(
+                    LANGUAGE_CHOICES,
+                    value=AUTO_DETECT_LABEL,
+                    label="Source language"
+                )
+
+                run_button = gr.Button(
+                    "Extract and Translate",
+                    variant="primary"
+                )
+
                 clear_button = gr.Button("Clear")
+
             with gr.Column(scale=2):
-                page_input = gr.Dropdown(choices=[], label="Page", visible=False, interactive=True)
-                image_output = gr.Image(label="Page preview (detected text boxes)", type="pil",
-                                        height=360, interactive=False)
+                page_input = gr.Dropdown(
+                    choices=[],
+                    label="Page",
+                    visible=False,
+                    interactive=True
+                )
+
+                image_output = gr.Image(
+                    label="Page preview (detected text boxes)",
+                    type="pil",
+                    height=360,
+                    interactive=False
+                )
+
         info_output = gr.Markdown()
+
         with gr.Row():
-            original_output = gr.Textbox(label="Original text (editable)", lines=16,
-                                         show_copy_button=True, interactive=True)
-            translated_output = gr.Textbox(label="English translation", lines=16,
-                                           show_copy_button=True, interactive=False)
+            original_output = gr.Textbox(
+                label="Original text (editable)",
+                lines=16,
+                show_copy_button=True,
+                interactive=True
+            )
+
+            translated_output = gr.Textbox(
+                label="English translation",
+                lines=16,
+                show_copy_button=True,
+                interactive=False
+            )
+
         retranslate_button = gr.Button("Re-translate edited text")
-        downloads = gr.File(label="Download results (TXT and PDF)", file_count="multiple")
+
+        downloads = gr.File(
+            label="Download results (TXT and PDF)",
+            file_count="multiple"
+        )
 
         examples = _sample_examples()
+
         if examples:
-            gr.Examples(examples=examples, inputs=[file_input, language_input],
-                        label="Try an example (click one, then press Extract and Translate)")
+            gr.Examples(
+                examples=examples,
+                inputs=[file_input, language_input],
+                label="Try an example (click one, then press Extract and Translate)"
+            )
 
         run_button.click(
             process,
             inputs=[file_input, language_input],
-            outputs=[state, page_input, image_output, info_output, original_output, translated_output, downloads],
+            outputs=[
+                state,
+                page_input,
+                image_output,
+                info_output,
+                original_output,
+                translated_output,
+                downloads
+            ],
         )
-        page_input.input(show_page, [page_input, state], [image_output, original_output, translated_output])
-        original_output.input(save_edit, [original_output, page_input, state], state,
-                              trigger_mode="always_last", show_progress="hidden")
-        retranslate_button.click(retranslate, [original_output, page_input, state],
-                                 [state, translated_output, downloads])
+
+        page_input.input(
+            show_page,
+            [page_input, state],
+            [image_output, original_output, translated_output]
+        )
+
+        original_output.input(
+            save_edit,
+            [original_output, page_input, state],
+            state,
+            trigger_mode="always_last",
+            show_progress="hidden"
+        )
+
+        retranslate_button.click(
+            retranslate,
+            [original_output, page_input, state],
+            [state, translated_output, downloads]
+        )
+
         clear_button.click(
             clear_all,
             inputs=None,
-            outputs=[file_input, language_input, state, page_input, image_output,
-                     info_output, original_output, translated_output, downloads],
+            outputs=[
+                file_input,
+                language_input,
+                state,
+                page_input,
+                image_output,
+                info_output,
+                original_output,
+                translated_output,
+                downloads
+            ],
         )
+
     return demo
 
 
