@@ -44,7 +44,7 @@ LANGUAGE_CHOICES = [AUTO_DETECT_LABEL] + list(LANGUAGES)
 SAMPLES_DIR = BASE_DIR / "tests" / "samples"
 
 
-# ----------------------------------------------------------------------------
+
 # Helpers
 # ----------------------------------------------------------------------------
 def _free_gpu_memory():
@@ -105,7 +105,6 @@ def _read_page(image, direct_text, language):
             "confidence": result.avg_confidence, "image": result.annotated, "source": "OCR"}
 
 
-# ----------------------------------------------------------------------------
 # Main pipeline
 # ----------------------------------------------------------------------------
 def process(file_path, language_choice, progress=gr.Progress()):

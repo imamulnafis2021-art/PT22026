@@ -24,7 +24,7 @@ Model weights are **not** stored in this repository. They download automatically
 run the app (EasyOCR to `~/.EasyOCR`, NLLB to the Hugging Face cache), so the first run needs internet.
 
 ## Requirements
-- Python 3.10 or 3.11
+- Python 3.11.9
 - NVIDIA GPU recommended (tested on RTX 4060, 8 GB). CPU also works but is slower.
 
 ## Installation (Windows PowerShell)
